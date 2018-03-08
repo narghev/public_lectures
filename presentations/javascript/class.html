@@ -1,0 +1,571 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>JavaScript Class</title>
+
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			const link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Introduction
+            
+            We are already familiar with objects.
+
+            Object is a datatype that can hold methods and properties.
+
+            It is easy and fun to imagine the world in an object oriented way.
+					</textarea>
+        </section> -->
+
+        <!-- <section data-markdown>
+					<textarea data-template>
+            ## Table example
+            
+            Let's think of a table as an object. What properties does it have?
+					</textarea>
+        </section> -->
+
+        <!-- <section data-markdown>
+					<textarea data-template>
+            ## Table example
+            
+            ```js
+              const myTable = {};
+              myTable.color = 'red';
+              myTable.legs = 4;
+            ```
+					</textarea>
+        </section> -->
+        
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Human example
+
+            Let's think of a person as an object. What properties or methods does it have?
+					</textarea>
+        </section> -->
+        
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Human example
+
+            ```js
+            const joe = {};
+
+            joe.name = 'Joe';
+            joe.profession = 'Programmer';
+            joe.colorOfHair = 'black';
+
+            joe.run = () => { console.log('I am Joe, and I am running.') };
+            joe.sleep = () => { console.log('Shshsh, Joe is sleeping.') };
+
+            ```
+					</textarea>
+        </section> -->
+        
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Lots of repetition if I want to make several tables or persons.
+            
+            The same thing needs to be done for Joe, Bill, Michael...
+					</textarea>
+        </section> -->
+        
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## One way to make out life easier
+            
+            ```js
+            const personMaker = (name, profession, colorOfHair) => {
+              return {
+                name, // name: name,
+                profession, // profession: profession,
+                colorOfHair, // colorOfHair: colorOfHair,
+                run: () => {
+                  console.log(`I am ${name}, and I am running.`);
+                },
+                sleep: () => {
+                  console.log(`Shshsh, ${name} is sleeping.`);
+                }
+              }
+            };
+
+            const joe = personMaker('Joe', 'programmer', 'black');
+            joe.run();
+            joe.sleep();
+            ```
+					</textarea>
+        </section> -->
+        <!-- <section data-markdown>
+            <textarea data-template>
+              ## JS Class (functions)
+
+              In fact, the personMaker function is a very close thing to what we would call a class.
+
+              Imagine a class is a factory, I am going to give it my desirable parameters, and it is going to give me back the resulting object.
+            </textarea>
+          </section> -->
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## JS Class (functions)
+            
+            Dear factory (personMaker), I need a person called Joe, who is a programmer, with black hair.
+
+            Factory responds - Dear customer, take Joe. In fact, because I am a person factory, I assumed that you needed a person, so I am going to give it the ability to run and sleep.
+					</textarea>
+        </section> -->
+      
+        <!-- <section data-markdown>
+            <textarea data-template>
+              ## JS Class (functions)
+
+              An actual JS class (in old days) would look like this.
+
+              ```js
+              function Person(name, profession, colorOfHair){
+                this.name = name;
+                this.profession = profession;
+                this.colorOfHair = colorOfHair;
+                this.run = () => {
+                  console.log(`I am ${name}, and I am running.`);
+                },
+                this.sleep = () => {
+                  console.log(`Shshsh, ${name} is sleeping.`);
+                }
+              }
+
+              const joe = new Person('Joe', 'programmer', 'black');
+              const doe = new Person('Doe', 'biker', 'red');
+              ```
+            </textarea>
+          </section> -->
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Couple of notes
+            
+            Due to the fact that there is no difference between a class and a function (at the first sight), it is a convention to write the first letter of a class name in uppercase.
+            This makes the code more readable.
+
+            What will be the difference in
+            ```js
+            //1
+            const joeWithNew = new Person('Joe', 'programmer', 'black');
+
+            //2
+            const joeWithouthNew = Person('Joe', 'programmer', 'black');
+            ```
+					</textarea>
+        </section> -->
+        <!-- <section data-markdown>
+					<textarea data-template>
+            ## Couple of notes
+
+            joeWithNew will be an instance of Person, whereas joeWithouthNew will be undefined.
+
+            Why? Because Person is just a function and it returns undefined.
+					</textarea>
+				</section> -->
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Execution context
+
+            As we know, it is possible to force a context to a JS function.
+
+            ```js
+            function foo(){
+              console.log(this.bar);
+            }
+
+            const zoo = {
+              bar: 'hey'
+            };
+
+            foo.call(zoo);
+            foo.apply(zoo);
+            ```
+					</textarea>
+				</section> -->
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Execution context
+            
+            So there actually has to be a way to declare functions like sleep and run, then force the context of the object we want on it.
+            
+            ```js
+            function Person(name, profession, colorOfHair){
+              this.name = name;
+              this.profession = profession;
+              this.colorOfHair = colorOfHair;
+            }
+
+            function run(){
+              console.log(`I am ${this.name}, and I am running.`);
+            }
+
+            function sleep(){
+              console.log(`Shshsh, ${this.name} is sleeping.`);
+            }
+
+            const joe = new Person('Joe', 'programmer', 'black');
+            const doe = new Person('Doe', 'biker', 'red');
+
+            run.call(joe);
+            run.call(doe);
+            ```
+					</textarea>
+				</section> -->
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Why?
+            
+            Yes, it is possible. But why would we actually do that?
+
+            The reason is memory management.
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## Why?
+            
+            In the first example where the methods were being assigned to this (the object itself), the size of the object was approximately 102B.
+
+            On the other hand, when the functions were independant the size of the object was approximately 86B.
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## Why?
+
+            Now imagine that there are 100 instances of Person class. 1600B of redundant memory is being used. We had the same result by forcing a context on a function.
+					</textarea>
+				</section> -->
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Solution
+            
+            There has to be a way to solve this problem. We need a function that every time will be called by an automatically forced context.
+					</textarea>
+				</section> -->
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Prototype
+            
+            The solution is the prototype.
+            
+            ```js
+            function Person(name, profession, colorOfHair){
+              this.name = name;
+              this.profession = profession;
+              this.colorOfHair = colorOfHair;
+            }
+
+            Person.prototype.run = function(){
+              console.log(`I am ${this.name}, and I am running.`);
+            }
+
+            Person.prototype.sleep = function(){
+              console.log(`Shshsh, ${this.name} is sleeping.`);
+            }
+
+            const joe = new Person('Joe', 'programmer', 'black');
+            const doe = new Person('Doe', 'biker', 'red');
+
+            joe.run();
+            doe.run();
+            ```
+					</textarea>
+				</section> -->
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## What happens?
+            
+            ```js
+            const joe = new Person('Joe', 'programmer', 'black');
+            const doe = new PersonWithPrototype('Doe', 'biker', 'red');
+
+            console.log(joe);
+            console.log(doe);
+            ```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## Prototpe Chain
+            
+            joe has both sleep and run methods, but doe does not. So how does doe.run() work?
+
+            When doe.run is being called, first it is going to look through the object's methods, then after not finding it there, it is going to search the functions in __proto__, which is chained to PersonWithPrototype's prototype.
+					</textarea>
+				</section> -->
+				<section data-markdown>
+					<textarea data-template>
+            ## Do it yourself!
+
+            ```
+            false || undefined || 'Haha' || 0
+            'false' || 'Don't be tricked' || 0 || undefined || 'many others'
+            'I am the first' || 'I am the second' || 'Latter the greater?'
+            0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10
+            1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 || 0
+            ```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## if statements
+            
+						Now, after we got so far with boolean expressions, we can put them into usage in the actual code. Remember the example of wearing a T-Shirt and sunglasses.
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## if statement syntax 
+            
+						```js
+            if (Some boolean expression here) {
+                // Things that need to be done if the expression evaluates to true
+            }
+            ```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## First if statement 
+            
+						you cannot use one reference to change <br> where another reference is pointed
+						```js
+            if (temperature >= 10 && weather === 'sunny') {
+                wear(cool_tshirt);
+                wear(sunglasses);
+            }
+            ```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## else statement 
+            
+            Now, this is too limited. Usually you make decision for both cases, not only if the condition is true. You do something `else` if the condition is not true. In case of JS, you can do this by using the word? `else` :smile: 
+            ```js
+            if (temperature >= 10 && weather === 'sunny') {
+                wear(cool_tshirt);
+                wear(sunglasses);
+            } else {
+                wear(warm_hoodie);
+            }
+            ```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## if .. else statement 
+            
+						What if I want to make more than 2 choices depending on the conditions. What if it's below -15 outside? Warm hoodie is not enough to not freeze in that situation. We need some other case.
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## A lot of choices. 
+            
+						```
+            if (temperature >= 10 && weather === 'sunny') {
+                wear(cool_tshirt);
+                wear(sunglasses);
+            } else if (temperature <= -15) {
+                wear(warm_coat);
+                wear(warm_hoodie);
+                wear(scarf);
+                wear(hat);
+                wear(warm_socks); // Granny was here :) 
+            } else {
+                wear(warm_hoodie);
+            }
+            ```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## TMNT 
+            
+            Program that tells TMNT name.
+            ```
+            Leonardo is wearing a blue mask
+            Raphael is wearing a red mask
+            Michelangelo is wearing an orange mask
+            Donatello is wearing a purple mask
+            ```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## TMNT with if .. else 
+            
+						```js
+            if (color === 'blue') {
+                console.log('Leonardo');
+            } else if (color === 'red') {
+                console.log('Raphael')
+            } else if (color === 'orange') {
+                console.log('Michelangelo')
+            } else {
+                console.log('Donatello');
+            }
+            ```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## Correct the bug! 
+            
+            This code works, but it has a small bug. Can you spot it? The more correct code would be.
+            ```js
+            if (color === 'blue') {
+                console.log('Leonardo');
+            } else if (color === 'red') {
+                console.log('Raphael')
+            } else if (color === 'orange') {
+                console.log('Michelangelo')
+            } else if {
+                console.log('Donatello');
+            }
+            ```
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## Intro to switch 
+            
+						This piece of code is long and hard to read. That's why we have `switch` statement, which is used exactly for cases like this one.
+					</textarea>
+				</section>
+				<section data-markdown>
+					<textarea data-template>
+            ## Switch 
+            
+            So, as we've already said, `switch` provied a better way to write the better readable code doing the same thing as the example above does. `switch` is useful when you have some variable and for each `case` of the value you want to do something.
+            It's used to branch the program depending just on a value of a single variable
+					</textarea>
+        </section>
+        <section data-markdown>
+					<textarea data-template>
+            ## Same code, better view 
+            
+            ```js
+            switch(color) {
+               case 'blue':
+                    console.log('Leonardo');
+                    break;
+               case 'red':
+                    console.log('Raphael');
+                    break;
+               case 'orange':
+                    console.log('Michelangelo');
+                    break;
+               case 'purple':
+                    console.log('Donatello);
+                    break;
+               default: 
+                   console.log('Have you even seen TMNT???');
+                   break;
+            }
+            ```
+					</textarea>
+        </section>
+        <section data-markdown>
+					<textarea data-template>
+            ## What's new in this code? 
+            
+            1. Keyword switch 
+            2. Keyword case
+            3. Logic after the case
+            4. break statement
+            5. default case
+					</textarea>
+        </section>
+        <section data-markdown>
+					<textarea data-template>
+            ## Same decision for multiple cases in switch 
+            
+            It may happen that you want to do the same thing in multiple cases. 
+            Let's say we get the name of the month and we want to output the weather of that month. 
+            So 'july' will output 'summer', 'december' will output 'winter' and so on. 
+            Instead of writing 12 case bodies, we can take advantage of that auto-execution of cases and write just 4 like this. 
+					</textarea>
+        </section>
+        <section data-markdown>
+					<textarea data-template>
+            ## The code 
+            
+            ```js
+            switch(monthName) {
+                case 'December':
+                case 'January':
+                case 'February':
+                    console.log('It's winter');
+                    break;
+                case 'March':
+                case 'April':
+                case 'May':
+                    console.log('It's spring');
+                    break;
+                case 'June':
+                case 'July':
+                case 'August':
+                    console.log('It's summer');
+                    break;
+                case 'September':
+                case 'October':
+                case 'November':
+                    console.log('It's autumn');
+                    break;
+                default: 
+                    console.log('There is no such month!');
+            }
+            ```
+					</textarea>
+        </section>
+        <section data-markdown>
+					<textarea data-template>
+            # Thank you!
+					</textarea>
+        </section>
+
+			</div>
+		</div>
+		<script src="../../lib/js/head.min.js"></script>
+		<script src="../../js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: '../../plugin/markdown/marked.js' },
+					{ src: '../../plugin/markdown/markdown.js' },
+					{ src: '../../plugin/notes/notes.js', async: true },
+					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
