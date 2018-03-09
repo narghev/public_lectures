@@ -1,7 +1,7 @@
 {
-  "name": "reveal.js",
-  "version": "3.6.0",
-  "description": "The HTML Presentation Framework",
+  "name": "public_presentations",
+  "version": "1.0.0",
+  "description": "My public presentations, made by reveal.js",
   "homepage": "http://revealjs.com",
   "subdomain": "revealjs",
   "main": "js/reveal.js",
@@ -11,13 +11,12 @@
     "build": "grunt"
   },
   "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
+    "name": "Narek Ghevandiani",
+    "email": "n.ghevandiani@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git@github.com:narghev/public_lectures.git"
   },
   "engines": {
     "node": ">=4.0.0"
@@ -38,6 +37,5 @@
     "grunt-zip": "~0.17.1",
     "mustache": "^2.3.0",
     "socket.io": "^1.7.3"
-  },
-  "license": "MIT"
+  }
 }
