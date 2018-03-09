@@ -1,31 +1,34 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>JavaScript Class</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="../../css/reveal.css">
-		<link rel="stylesheet" href="../../css/theme/black.css">
+  <title>JavaScript Class</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="../../lib/css/zenburn.css">
+  <link rel="stylesheet" href="../../css/reveal.css">
+  <link rel="stylesheet" href="../../css/theme/black.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			const link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				 <section data-markdown>
-					<textarea data-template>
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section data-markdown>
+        <textarea data-template>
             ## Introduction
             
             We are already familiar with objects.
@@ -34,18 +37,18 @@
 
             It is easy and fun to imagine the world in an object oriented way.
 					</textarea>
-        </section>
+      </section>
 
-        <section data-markdown>
-					<textarea data-template>
+      <section data-markdown>
+        <textarea data-template>
             ## Table example
             
             Let's think of a table as an object. What properties does it have?
 					</textarea>
-        </section>
+      </section>
 
-        <section data-markdown>
-					<textarea data-template>
+      <section data-markdown>
+        <textarea data-template>
             ## Table example
             
             ```js
@@ -54,18 +57,18 @@
               myTable.legs = 4;
             ```
 					</textarea>
-        </section>
-        
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Human example
 
             Let's think of a person as an object. What properties or methods does it have?
 					</textarea>
-        </section>
-        
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Human example
 
             ```js
@@ -80,18 +83,18 @@
 
             ```
 					</textarea>
-        </section>
-        
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Lots of repetition if I want to make several tables or persons.
             
             The same thing needs to be done for Joe, Bill, Michael...
 					</textarea>
-        </section>
-        
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## One way to make our lives easier
             
             ```js
@@ -114,52 +117,55 @@
             joe.sleep();
             ```
 					</textarea>
-        </section>
-        <section data-markdown>
-            <textarea data-template>
-              ## JS Class (functions)
+      </section>
 
-              In fact, the personMaker function is a very close thing to what we would call a class.
+      <section data-markdown>
+        <textarea data-template>
+            ## JS Class (functions)
 
-              Imagine a class is a factory, I am going to give it my desirable parameters, and it is going to give me back the resulting object.
-            </textarea>
-          </section>
-				<section data-markdown>
-					<textarea data-template>
+            In fact, the personMaker function is a very close thing to what we would call a class.
+
+            Imagine a class is a factory, I am going to give it my desirable parameters, and it is going to give me back the resulting object.
+          </textarea>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## JS Class (functions)
             
             Dear factory (personMaker), I need a person called Joe, who is a programmer, with black hair.
 
             Factory responds - Dear customer, take Joe. In fact, because I am a person factory, I assumed that you needed a person, so I am going to give it the ability to run and sleep.
 					</textarea>
-        </section>
-      
-        <section data-markdown>
-            <textarea data-template>
-              ## JS Class (functions)
+      </section>
 
-              An actual JS class (in old days) would look like this.
+      <section data-markdown>
+        <textarea data-template>
+            ## JS Class (functions)
 
-              ```js
-              function Person(name, profession, colorOfHair){
-                this.name = name;
-                this.profession = profession;
-                this.colorOfHair = colorOfHair;
-                this.run = () => {
-                  console.log(`I am ${name}, and I am running.`);
-                },
-                this.sleep = () => {
-                  console.log(`Shshsh, ${name} is sleeping.`);
-                }
+            An actual JS class (in old days) would look like this.
+
+            ```js
+            function Person(name, profession, colorOfHair){
+              this.name = name;
+              this.profession = profession;
+              this.colorOfHair = colorOfHair;
+              this.run = () => {
+                console.log(`I am ${name}, and I am running.`);
+              },
+              this.sleep = () => {
+                console.log(`Shshsh, ${name} is sleeping.`);
               }
+            }
 
-              const joe = new Person('Joe', 'programmer', 'black');
-              const doe = new Person('Doe', 'biker', 'red');
-              ```
-            </textarea>
-          </section>
-				<section data-markdown>
-					<textarea data-template>
+            const joe = new Person('Joe', 'programmer', 'black');
+            const doe = new Person('Doe', 'biker', 'red');
+            ```
+          </textarea>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Couple of notes
             
             Due to the fact that there is no difference between a class and a function (at the first sight), it is a convention to write the first letter of a class name in uppercase.
@@ -174,18 +180,20 @@
             const joeWithouthNew = Person('Joe', 'programmer', 'black');
             ```
 					</textarea>
-        </section>
-        <section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Couple of notes
 
             joeWithNew will be an instance of Person, whereas joeWithouthNew will be undefined.
 
             Why? Because Person is just a function and it returns undefined.
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Execution context
 
             As we know, it is possible to force a context to a JS function.
@@ -203,9 +211,10 @@
             foo.apply(zoo);
             ```
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Execution context
             
             So there actually has to be a way to declare functions like sleep and run, then force the context of the object we want on it.
@@ -232,41 +241,46 @@
             run.call(doe);
             ```
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Why?
             
             Yes, it is possible. But why would we actually do that?
 
             The reason is memory management.
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Why?
             
             In the first example where the methods were being assigned to this (the object itself), the size of the object was approximately 102B.
 
             On the other hand, when the functions were independant the size of the object was approximately 86B.
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Why?
 
             Now imagine that there are 100 instances of Person class. 1600B of redundant memory is being used. We had the same result by forcing a context on a function.
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Solution
             
             There has to be a way to solve this problem. We need a function that every time will be called by an automatically forced context.
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Prototype
             
             The solution is the prototype.
@@ -293,10 +307,11 @@
             doe.run();
             ```
 					</textarea>
-        </section>
-        <section>
-          <section data-markdown>
-            <textarea data-template>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
               ## What happens?
               
               ```js
@@ -307,9 +322,10 @@
               console.log(doe);
               ```
             </textarea>
-          </section>
-          <section data-markdown>
-            <textarea data-template>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
               ```js
               function Person(name, profession, colorOfHair){
                 this.name = name;
@@ -338,19 +354,21 @@
               }
               ```
             </textarea>
-          </section>
         </section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Prototpe Chain
             
             joe has both sleep and run methods, but doe does not. So how does doe.run() work?
 
             When doe.run is being called, first it is going to look through the object's methods, then after not finding it there, it is going to search the functions in __proto__, which is chained to PersonWithPrototype's prototype.
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## JS Class
 
             ```js
@@ -364,17 +382,19 @@
             const myTable = new Table('red', 4);
             ```
 					</textarea>
-        </section>
-        <section>
-          <section data-markdown>
-            <textarea data-template>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
               ## Couple of notes
               #### 1) Hoisting
               #### 2) new vs function call
             </textarea>
-          </section>
-          <section data-markdown>
-            <textarea data-template>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
               ```js
               class Table {
                 constructor(color, legs){
@@ -385,11 +405,12 @@
 
               const myTable = Table('red', 4);
                ```
-            </textarea> 
-          </section>
-        </section> 
-				 <section data-markdown>
-					<textarea data-template>
+            </textarea>
+        </section>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Constructor
             
             Note that if we wrote a class with function syntax, that function and the constructor of the Table class would ideally look the same.
@@ -404,10 +425,11 @@
               this.legs = legs;
             }
             ```
-					</textarea>
-				</section> 
-				<section data-markdown>
-					<textarea data-template>
+          </textarea>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Constructor
             
             So constructor is a special method of a class, that describes how the object should be constructed, in other words, it is setting the peroperties of the object.
@@ -415,18 +437,20 @@
 
             Note that there can be only ONE constructor for a class.
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Prototype methods 
             
             Again, if we want to add a method to our object, in the class we can write this.f = () => {}.
             But as we saw, this is not good for the memory, so we should add the function to the prototpe of the class.
             With function declaration of the class, we would mutate the prototype after and outside the class.
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Prototype methods
 
             ```js
@@ -435,18 +459,19 @@
 
             This looks ugly, and often it is not a good idea to mutate the prototype of a class, because of performance issues and sometimes even the risk of breaking the prototype chain.
 					</textarea>
-        </section> 
-        <section>
-          <section data-markdown>
-            <textarea data-template>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
               ## Prototype methods
   
               So the way we actually do it with class notation is simple.
               We just add the method in the class, and it automatically is being assigned to the prototpe.
             </textarea>
-          </section>
-          <section data-markdown>
-            <textarea data-template>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
               ```js
               class Person {
                 constructor(name, profession, colorOfHair){
@@ -465,21 +490,21 @@
               }
               ```
             </textarea>
-          </section>
-        </section> 
+        </section>
+      </section>
 
-				<section data-markdown>
-					<textarea data-template>
+      <section data-markdown>
+        <textarea data-template>
             ## Static methods
             
             Sometimes we do not want to add methods to the prototype of the class, and not pass it to any instance of the class.
             In other words, we do not want that method to be accessible on the prototype chain.
             Very often those methods are just utility (helper) functions for an application.
 					</textarea>
-        </section>
-        
-        <section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Static methods
             
             For example, all the methods in the Math class (or object, because everything in JS are objects) are static.
@@ -490,17 +515,18 @@
             Math.random();
             ```
 					</textarea>
-        </section>
-        <section>
-          <section data-markdown>
-            <textarea data-template>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
               ## Static methods
               
               So to create a static method, we just add the word static in front of it.
             </textarea>
-          </section>
-          <section data-markdown>
-            <textarea data-template>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
               ```js
               class MyMath {
                 static random(n){ // we want a function to return a random number from 0 to n
@@ -518,19 +544,20 @@
               console.log(MyMath.random(5));
               ```
             </textarea>
-          </section>
-        </section> 
-				
-				<section data-markdown>
-					<textarea data-template>
+        </section>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Getters and setters 
 
             Although very often you can do things with regular methods, setters and getters exist in JS.
             We can say, that they are dynamic properties.
 					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Getter
             
             ```js
@@ -553,17 +580,18 @@
             console.log(array.length);
             ```
 					</textarea>
-        </section>
-        <section>
-          <section data-markdown>
-            <textarea data-template>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
               ## Getter 
               
               A good thing about getters is that even if we assign a new value to them, they are not going to be mutated.
             </textarea>
-          </section>
-          <section data-markdown>
-            <textarea data-template>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
               ```js
               class MyArray {
                 constructor(elems){
@@ -587,18 +615,20 @@
               console.log(array.length);
               ```
             </textarea>
-          </section>
         </section>
-        <section>
-          <section data-markdown>
-            <textarea data-template>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
               ## Setter
               
               Just like getter, setter is function that is used like property.
             </textarea>
-          </section>
-          <section data-markdown>
-            <textarea data-template>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
               ```js
               class Person {
                 set fullName(name){
@@ -616,20 +646,21 @@
               console.log(p.lastName);
               ```
             </textarea>
-          </section>
-        </section> 
-        
-        <section data-markdown>
-					<textarea data-template>
+        </section>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Subclassing or inheritance
             
             Now, imagine we want a class Animal, and we want a class Dog.
             Right now, the way we would do it is creating seperate classes for each,
             and if they share some common things, add to both class prototypes.
 					</textarea>
-        </section>
-        <section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Subclassing or inheritance
             
             But again, as in real life, dog is an animal, and there are many things that are shared between them,
@@ -638,9 +669,10 @@
             For this reason, we can make an Animal class, then make a dog class which will be a subclass of Animal,
             then inherit the shared methods automatically.
 					</textarea>
-        </section> 
-        <section data-markdown>
-					<textarea data-template>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
             ## Subclassing or inheritance
             
             ```js
@@ -662,10 +694,10 @@
             }
             ```
 					</textarea>
-        </section> 
+      </section>
 
-        <section data-markdown>
-					<textarea data-template>
+      <section data-markdown>
+        <textarea data-template>
             ## Subclassing or inheritance
 
             We have the Animal class, any animal belonging to this type can run, and can eat.
@@ -676,10 +708,10 @@
             dog.eat();
             ```
 					</textarea>
-        </section> 
+      </section>
 
-        <section data-markdown>
-          <textarea data-template>
+      <section data-markdown>
+        <textarea data-template>
               ## Subclassing or inheritance
 
               But I also want my dog to be able to bark, becuase dogs usually bark. :D
@@ -696,21 +728,20 @@
               };
               ```
           </textarea>
-        </section> 
+      </section>
 
-
-        <section data-markdown>
-          <textarea data-template>
+      <section data-markdown>
+        <textarea data-template>
             ## Subclassing or inheritance
 
             As we discussed earlier, it is not convinient to add a function directly to the object.
             So I have to make a Dog class, which will take methods from Animal class, and add a bark method.
           </textarea>
-        </section> 
+      </section>
 
-        <section>
-          <section data-markdown>
-            <textarea data-template>
+      <section>
+        <section data-markdown>
+          <textarea data-template>
               #### Subclassing or inheritance
   
               ```js
@@ -730,108 +761,108 @@
               console.log(dog); //Dog {name: undefined, color: undefined, age: undefined, type: undefined}
               ```
             </textarea>
-          </section>
-            <section data-markdown>
-                <textarea data-template>
-                  #### Subclassing
+        </section>
+        <section data-markdown>
+          <textarea data-template>
+              #### Subclassing
 
-                  Let's add a constructor to Dog, because we do not want all it's properties to be undefined.
+              Let's add a constructor to Dog, because we do not want all it's properties to be undefined.
 
-                  ```js
-                  constructor(name, color, age){
-                    this.name = name;
-                    this.color = color;
-                    this.age = age;
-                  }
-                  ```
-                </textarea>
-              </section>
-            <section data-markdown>
-              <textarea data-template>
-                #### Subclassing
+              ```js
+              constructor(name, color, age){
+                this.name = name;
+                this.color = color;
+                this.age = age;
+              }
+              ```
+            </textarea>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
+              #### Subclassing
 
-                If now, we try creating a new instance of dog
+              If now, we try creating a new instance of dog
 
-                ```js
-                const dog = new Dog('rex', 'black', 12);
-                ```
+              ```js
+              const dog = new Dog('rex', 'black', 12);
+              ```
 
-                We get an error. Why? Because we want to construct the Dog class, based on Animal class.
-                But the Animal class is not constructed yet. Means, it does not have it's properties.
-              </textarea>
-            </section>
+              We get an error. Why? Because we want to construct the Dog class, based on Animal class.
+              But the Animal class is not constructed yet. Means, it does not have it's properties.
+            </textarea>
+        </section>
 
-            <section data-markdown>
-              <textarea data-template>
-                #### Super
+        <section data-markdown>
+          <textarea data-template>
+              #### Super
 
-                We have to construct the Animal class in the first place. And how do we construct any class?
-                By calling its contructor. The keyword to call the constructor of the class a class inherited from is super()
-              </textarea>
-            </section>
+              We have to construct the Animal class in the first place. And how do we construct any class?
+              By calling its contructor. The keyword to call the constructor of the class a class inherited from is super()
+            </textarea>
+        </section>
 
-            <section data-markdown>
-              <textarea data-template>
-                #### Super
+        <section data-markdown>
+          <textarea data-template>
+              #### Super
 
-                We call the constructor with super(), and we pass the arguments.
+              We call the constructor with super(), and we pass the arguments.
 
-                ```js
+              ```js
+              constructor(name, color, age){
+                super(name, color, age, 'dog');
+              }
+              ```
+
+              Note, the constructor of Dog is not getting a type argument, because the type is dog, so there
+              is no need to make it an argument. The name, color, age can be different between 2 dogs, but not the type.
+            </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+              #### Dog class
+
+              ```js
+              class Dog extends Animal {
                 constructor(name, color, age){
                   super(name, color, age, 'dog');
                 }
+                bark(){
+                  let times = Math.floor(Math.random()*20);
+                  while (times >= 0){
+                    console.log('haf');
+                    times--;
+                  }
+                }
+              }
+
+              const dog = new Dog('rex', 'black', 12);
+              console.log(dog);
+              dog.run();
+              dog.eat();
+              dog.bark();
+              ```
+            </textarea>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
+                #### Subclassing
+
+                If a class does not have a constructor, and is being initiated with some arguments,
+                the arguments are going to automatically be passed to the parents constructor.
+                Which means, if I do not make a constructor for the dog class, and make a new object like
+                ```js
+                const dog = new Dog('rex', 'black', 12, 'dog');
                 ```
 
-                Note, the constructor of Dog is not getting a type argument, because the type is dog, so there
-                is no need to make it an argument. The name, color, age can be different between 2 dogs, but not the type.
+                This would still work, and my dog object would have the properties with their values.
               </textarea>
-            </section>
-
-            <section data-markdown>
-                <textarea data-template>
-                  #### Dog class
-  
-                  ```js
-                  class Dog extends Animal {
-                    constructor(name, color, age){
-                      super(name, color, age, 'dog');
-                    }
-                    bark(){
-                      let times = Math.floor(Math.random()*20);
-                      while (times >= 0){
-                        console.log('haf');
-                        times--;
-                      }
-                    }
-                  }
-
-                  const dog = new Dog('rex', 'black', 12);
-                  console.log(dog);
-                  dog.run();
-                  dog.eat();
-                  dog.bark();
-                  ```
-                </textarea>
-              </section>
-              <section data-markdown>
-                  <textarea data-template>
-                    #### Subclassing
-
-                    If a class does not have a constructor, and is being initiated with some arguments,
-                    the arguments are going to automatically be passed to the parents constructor.
-                    Which means, if I do not make a constructor for the dog class, and make a new object like
-                    ```js
-                    const dog = new Dog('rex', 'black', 12, 'dog');
-                    ```
-
-                    This would still work, and my dog object would have the properties with their values.
-                  </textarea>
-                </section>
         </section>
+      </section>
 
-        <section>
-            <section data-markdown>
-                <textarea data-template>
+      <section>
+        <section data-markdown>
+          <textarea data-template>
                   #### Subclassing
     
                   Now, a question can be if the constructor of the parent class is being called automatically, 
@@ -842,9 +873,9 @@
     
                   But, if we make a constructor, without calling the parents constructor an exception is being thrown. So the contructor would look like this
                 </textarea>
-              </section>
-              <section data-markdown>
-                <textarea data-template>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
                   ```js
                   constructor(name, color, age, tail){
                     super(name, color, age, 'dog');
@@ -852,44 +883,45 @@
                   }
                   ```
                 </textarea>
-              </section>
         </section>
-        
-        
-        
+      </section>
 
-        <section data-markdown>
-          <textarea data-template>
+
+
+
+      <section data-markdown>
+        <textarea data-template>
             ### Static methods in subclasses
 
             As static methods are not being assigned to the prototype, they also are not being passed to the subclass.
           </textarea>
-        </section>
+      </section>
 
-        <section data-markdown>
-            <textarea data-template>
+      <section data-markdown>
+        <textarea data-template>
               ## Q and A
   
               #### THANK YOU!
             </textarea>
-          </section>
-			</div>
-		</div>
-		<script src="../../lib/js/head.min.js"></script>
-		<script src="../../js/reveal.js"></script>
+      </section>
+    </div>
+  </div>
+  <script src="../../lib/js/head.min.js"></script>
+  <script src="../../js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: '../../plugin/markdown/marked.js' },
-					{ src: '../../plugin/markdown/markdown.js' },
-					{ src: '../../plugin/notes/notes.js', async: true },
-					{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      dependencies: [
+        { src: '../../plugin/markdown/marked.js' },
+        { src: '../../plugin/markdown/markdown.js' },
+        { src: '../../plugin/notes/notes.js', async: true },
+        { src: '../../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+
 </html>
