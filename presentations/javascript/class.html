@@ -24,7 +24,7 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<!-- <section data-markdown>
+				 <section data-markdown>
 					<textarea data-template>
             ## Introduction
             
@@ -384,11 +384,11 @@
               }
 
               const myTable = Table('red', 4);
-              ```
-            </textarea>
+               ```
+            </textarea> 
           </section>
-        </section> -->
-				<!-- <section data-markdown>
+        </section> 
+				 <section data-markdown>
 					<textarea data-template>
             ## Constructor
             
@@ -588,13 +588,13 @@
               ```
             </textarea>
           </section>
-        </section>-->
+        </section>
         <section>
           <section data-markdown>
             <textarea data-template>
               ## Setter
               
-              Just like getter setter is function that is used like property.
+              Just like getter, setter is function that is used like property.
             </textarea>
           </section>
           <section data-markdown>
@@ -607,7 +607,8 @@
               }
 
               // note if a class does not have
-              //a constructor it can be initialized
+              // a constructor it can be initialized
+              // without the braces
 
               const p = new Person; 
               p.fullName = 'Joe Doe';
@@ -616,67 +617,262 @@
               ```
             </textarea>
           </section>
-        </section>
+        </section> 
         
         <section data-markdown>
 					<textarea data-template>
-            ## What's new in this code? 
+            ## Subclassing or inheritance
             
-            1. Keyword switch 
-            2. Keyword case
-            3. Logic after the case
-            4. break statement
-            5. default case
+            Now, imagine we want a class Animal, and we want a class Dog.
+            Right now, the way we would do it is creating seperate classes for each,
+            and if they share some common things, add to both class prototypes.
 					</textarea>
         </section>
         <section data-markdown>
 					<textarea data-template>
-            ## Same decision for multiple cases in switch 
+            ## Subclassing or inheritance
             
-            It may happen that you want to do the same thing in multiple cases. 
-            Let's say we get the name of the month and we want to output the weather of that month. 
-            So 'july' will output 'summer', 'december' will output 'winter' and so on. 
-            Instead of writing 12 case bodies, we can take advantage of that auto-execution of cases and write just 4 like this. 
+            But again, as in real life, dog is an animal, and there are many things that are shared between them,
+            for example methods like running, eating, etc... 
+
+            For this reason, we can make an Animal class, then make a dog class which will be a subclass of Animal,
+            then inherit the shared methods automatically.
 					</textarea>
-        </section>
+        </section> 
         <section data-markdown>
 					<textarea data-template>
-            ## The code 
+            ## Subclassing or inheritance
             
             ```js
-            switch(monthName) {
-                case 'December':
-                case 'January':
-                case 'February':
-                    console.log('It's winter');
-                    break;
-                case 'March':
-                case 'April':
-                case 'May':
-                    console.log('It's spring');
-                    break;
-                case 'June':
-                case 'July':
-                case 'August':
-                    console.log('It's summer');
-                    break;
-                case 'September':
-                case 'October':
-                case 'November':
-                    console.log('It's autumn');
-                    break;
-                default: 
-                    console.log('There is no such month!');
+            class Animal {
+              constructor(name, color, age, type){
+                this.name = name;
+                this.color = color;
+                this.age = age;
+                this.type = type;
+              }
+
+              run(){
+                console.log(`I am a ${this.type}, and I am running`);
+              }
+
+              eat(){
+                console.log(`I am a ${this.type}, and I am eating`);
+              }
             }
             ```
 					</textarea>
-        </section>
+        </section> 
+
         <section data-markdown>
 					<textarea data-template>
-            # Thank you!
+            ## Subclassing or inheritance
+
+            We have the Animal class, any animal belonging to this type can run, and can eat.
+            
+            ```js
+            const dog = new Animal('rex', 'black', 12, 'dog');
+            dog.run();
+            dog.eat();
+            ```
 					</textarea>
+        </section> 
+
+        <section data-markdown>
+          <textarea data-template>
+              ## Subclassing or inheritance
+
+              But I also want my dog to be able to bark, becuase dogs usually bark. :D
+
+              And one way to do that would be
+              
+              ```js
+              dog.bark = () => {
+                let times = Math.floor(Math.random()*20);
+                while (times >= 0){
+                  console.log('haf');
+                  times--;
+                }
+              };
+              ```
+          </textarea>
+        </section> 
+
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Subclassing or inheritance
+
+            As we discussed earlier, it is not convinient to add a function directly to the object.
+            So I have to make a Dog class, which will take methods from Animal class, and add a bark method.
+          </textarea>
+        </section> 
+
+        <section>
+          <section data-markdown>
+            <textarea data-template>
+              #### Subclassing or inheritance
+  
+              ```js
+              class Dog extends Animal {
+                bark(){
+                  let times = Math.floor(Math.random()*20);
+                  while (times >= 0){
+                    console.log('haf');
+                    times--;
+                  }
+                }
+              }
+  
+              const dog = new Dog;
+              dog.bark();
+              dog.run();
+              console.log(dog); //Dog {name: undefined, color: undefined, age: undefined, type: undefined}
+              ```
+            </textarea>
+          </section>
+            <section data-markdown>
+                <textarea data-template>
+                  #### Subclassing
+
+                  Let's add a constructor to Dog, because we do not want all it's properties to be undefined.
+
+                  ```js
+                  constructor(name, color, age){
+                    this.name = name;
+                    this.color = color;
+                    this.age = age;
+                  }
+                  ```
+                </textarea>
+              </section>
+            <section data-markdown>
+              <textarea data-template>
+                #### Subclassing
+
+                If now, we try creating a new instance of dog
+
+                ```js
+                const dog = new Dog('rex', 'black', 12);
+                ```
+
+                We get an error. Why? Because we want to construct the Dog class, based on Animal class.
+                But the Animal class is not constructed yet. Means, it does not have it's properties.
+              </textarea>
+            </section>
+
+            <section data-markdown>
+              <textarea data-template>
+                #### Super
+
+                We have to construct the Animal class in the first place. And how do we construct any class?
+                By calling its contructor. The keyword to call the constructor of the class a class inherited from is super()
+              </textarea>
+            </section>
+
+            <section data-markdown>
+              <textarea data-template>
+                #### Super
+
+                We call the constructor with super(), and we pass the arguments.
+
+                ```js
+                constructor(name, color, age){
+                  super(name, color, age, 'dog');
+                }
+                ```
+
+                Note, the constructor of Dog is not getting a type argument, because the type is dog, so there
+                is no need to make it an argument. The name, color, age can be different between 2 dogs, but not the type.
+              </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                  #### Dog class
+  
+                  ```js
+                  class Dog extends Animal {
+                    constructor(name, color, age){
+                      super(name, color, age, 'dog');
+                    }
+                    bark(){
+                      let times = Math.floor(Math.random()*20);
+                      while (times >= 0){
+                        console.log('haf');
+                        times--;
+                      }
+                    }
+                  }
+
+                  const dog = new Dog('rex', 'black', 12);
+                  console.log(dog);
+                  dog.run();
+                  dog.eat();
+                  dog.bark();
+                  ```
+                </textarea>
+              </section>
+              <section data-markdown>
+                  <textarea data-template>
+                    #### Subclassing
+
+                    If a class does not have a constructor, and is being initiated with some arguments,
+                    the arguments are going to automatically be passed to the parents constructor.
+                    Which means, if I do not make a constructor for the dog class, and make a new object like
+                    ```js
+                    const dog = new Dog('rex', 'black', 12, 'dog');
+                    ```
+
+                    This would still work, and my dog object would have the properties with their values.
+                  </textarea>
+                </section>
         </section>
 
+        <section>
+            <section data-markdown>
+                <textarea data-template>
+                  #### Subclassing
+    
+                  Now, a question can be if the constructor of the parent class is being called automatically, 
+                  why do we need the keyword super.
+    
+                  Let's imagine, that we wanted to add some properties to the Dog class. For example, some dogs have cut tails.
+                  We only add properties to a class in a constructor, so we already need a constructor for dog.
+    
+                  But, if we make a constructor, without calling the parents constructor an exception is being thrown. So the contructor would look like this
+                </textarea>
+              </section>
+              <section data-markdown>
+                <textarea data-template>
+                  ```js
+                  constructor(name, color, age, tail){
+                    super(name, color, age, 'dog');
+                    this.tail = tail;
+                  }
+                  ```
+                </textarea>
+              </section>
+        </section>
+        
+        
+        
+
+        <section data-markdown>
+          <textarea data-template>
+            ### Static methods in subclasses
+
+            As static methods are not being assigned to the prototype, they also are not being passed to the subclass.
+          </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+              ## Q and A
+  
+              #### THANK YOU!
+            </textarea>
+          </section>
 			</div>
 		</div>
 		<script src="../../lib/js/head.min.js"></script>
