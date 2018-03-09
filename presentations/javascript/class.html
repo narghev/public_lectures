@@ -34,17 +34,17 @@
 
             It is easy and fun to imagine the world in an object oriented way.
 					</textarea>
-        </section> -->
+        </section>
 
-        <!-- <section data-markdown>
+        <section data-markdown>
 					<textarea data-template>
             ## Table example
             
             Let's think of a table as an object. What properties does it have?
 					</textarea>
-        </section> -->
+        </section>
 
-        <!-- <section data-markdown>
+        <section data-markdown>
 					<textarea data-template>
             ## Table example
             
@@ -54,17 +54,17 @@
               myTable.legs = 4;
             ```
 					</textarea>
-        </section> -->
+        </section>
         
-				<!-- <section data-markdown>
+				<section data-markdown>
 					<textarea data-template>
             ## Human example
 
             Let's think of a person as an object. What properties or methods does it have?
 					</textarea>
-        </section> -->
+        </section>
         
-				<!-- <section data-markdown>
+				<section data-markdown>
 					<textarea data-template>
             ## Human example
 
@@ -80,19 +80,19 @@
 
             ```
 					</textarea>
-        </section> -->
+        </section>
         
-				<!-- <section data-markdown>
+				<section data-markdown>
 					<textarea data-template>
             ## Lots of repetition if I want to make several tables or persons.
             
             The same thing needs to be done for Joe, Bill, Michael...
 					</textarea>
-        </section> -->
+        </section>
         
-				<!-- <section data-markdown>
+				<section data-markdown>
 					<textarea data-template>
-            ## One way to make out life easier
+            ## One way to make our lives easier
             
             ```js
             const personMaker = (name, profession, colorOfHair) => {
@@ -114,8 +114,8 @@
             joe.sleep();
             ```
 					</textarea>
-        </section> -->
-        <!-- <section data-markdown>
+        </section>
+        <section data-markdown>
             <textarea data-template>
               ## JS Class (functions)
 
@@ -123,8 +123,8 @@
 
               Imagine a class is a factory, I am going to give it my desirable parameters, and it is going to give me back the resulting object.
             </textarea>
-          </section> -->
-				<!-- <section data-markdown>
+          </section>
+				<section data-markdown>
 					<textarea data-template>
             ## JS Class (functions)
             
@@ -132,9 +132,9 @@
 
             Factory responds - Dear customer, take Joe. In fact, because I am a person factory, I assumed that you needed a person, so I am going to give it the ability to run and sleep.
 					</textarea>
-        </section> -->
+        </section>
       
-        <!-- <section data-markdown>
+        <section data-markdown>
             <textarea data-template>
               ## JS Class (functions)
 
@@ -157,8 +157,8 @@
               const doe = new Person('Doe', 'biker', 'red');
               ```
             </textarea>
-          </section> -->
-				<!-- <section data-markdown>
+          </section>
+				<section data-markdown>
 					<textarea data-template>
             ## Couple of notes
             
@@ -174,8 +174,8 @@
             const joeWithouthNew = Person('Joe', 'programmer', 'black');
             ```
 					</textarea>
-        </section> -->
-        <!-- <section data-markdown>
+        </section>
+        <section data-markdown>
 					<textarea data-template>
             ## Couple of notes
 
@@ -183,8 +183,8 @@
 
             Why? Because Person is just a function and it returns undefined.
 					</textarea>
-				</section> -->
-				<!-- <section data-markdown>
+				</section>
+				<section data-markdown>
 					<textarea data-template>
             ## Execution context
 
@@ -203,8 +203,8 @@
             foo.apply(zoo);
             ```
 					</textarea>
-				</section> -->
-				<!-- <section data-markdown>
+				</section>
+				<section data-markdown>
 					<textarea data-template>
             ## Execution context
             
@@ -232,8 +232,8 @@
             run.call(doe);
             ```
 					</textarea>
-				</section> -->
-				<!-- <section data-markdown>
+				</section>
+				<section data-markdown>
 					<textarea data-template>
             ## Why?
             
@@ -257,15 +257,15 @@
 
             Now imagine that there are 100 instances of Person class. 1600B of redundant memory is being used. We had the same result by forcing a context on a function.
 					</textarea>
-				</section> -->
-				<!-- <section data-markdown>
+				</section>
+				<section data-markdown>
 					<textarea data-template>
             ## Solution
             
             There has to be a way to solve this problem. We need a function that every time will be called by an automatically forced context.
 					</textarea>
-				</section> -->
-				<!-- <section data-markdown>
+				</section>
+				<section data-markdown>
 					<textarea data-template>
             ## Prototype
             
@@ -293,20 +293,53 @@
             doe.run();
             ```
 					</textarea>
-				</section> -->
-				<!-- <section data-markdown>
-					<textarea data-template>
-            ## What happens?
-            
-            ```js
-            const joe = new Person('Joe', 'programmer', 'black');
-            const doe = new PersonWithPrototype('Doe', 'biker', 'red');
+        </section>
+        <section>
+          <section data-markdown>
+            <textarea data-template>
+              ## What happens?
+              
+              ```js
+              const joe = new Person('Joe', 'programmer', 'black');
+              const doe = new PersonWithPrototype('Doe', 'biker', 'red');
+  
+              console.log(joe);
+              console.log(doe);
+              ```
+            </textarea>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+              ```js
+              function Person(name, profession, colorOfHair){
+                this.name = name;
+                this.profession = profession;
+                this.colorOfHair = colorOfHair;
+              }
+              
+              Person.prototype.run = function(){
+                console.log(`I am ${this.name}, and I am running.`);
+              }
+              
+              Person.prototype.sleep = function(){
+                console.log(`Shshsh, ${this.name} is sleeping.`);
+              }
 
-            console.log(joe);
-            console.log(doe);
-            ```
-					</textarea>
-				</section>
+              function PersonWithoutPrototype(name, profession, colorOfHair){
+                this.name = name;
+                this.profession = profession;
+                this.colorOfHair = colorOfHair;
+                this.run = () => {
+                  console.log(`I am ${name}, and I am running.`);
+                },
+                this.sleep = () => {
+                  console.log(`Shshsh, ${name} is sleeping.`);
+                }
+              }
+              ```
+            </textarea>
+          </section>
+        </section>
 				<section data-markdown>
 					<textarea data-template>
             ## Prototpe Chain
