@@ -94,7 +94,7 @@ module.exports = function(grunt) {
 			server: {
 				options: {
 					port: port,
-					base: `${root}/presentations`,
+					base: root,
 					livereload: true,
 					open: true,
 					useAvailablePort: true
