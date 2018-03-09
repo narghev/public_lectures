@@ -348,123 +348,179 @@
 
             When doe.run is being called, first it is going to look through the object's methods, then after not finding it there, it is going to search the functions in __proto__, which is chained to PersonWithPrototype's prototype.
 					</textarea>
-				</section> -->
+				</section>
 				<section data-markdown>
 					<textarea data-template>
-            ## Do it yourself!
+            ## JS Class
 
-            ```
-            false || undefined || 'Haha' || 0
-            'false' || 'Don't be tricked' || 0 || undefined || 'many others'
-            'I am the first' || 'I am the second' || 'Latter the greater?'
-            0 || 1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10
-            1 || 2 || 3 || 4 || 5 || 6 || 7 || 8 || 9 || 10 || 0
-            ```
-					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
-            ## if statements
-            
-						Now, after we got so far with boolean expressions, we can put them into usage in the actual code. Remember the example of wearing a T-Shirt and sunglasses.
-					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
-            ## if statement syntax 
-            
-						```js
-            if (Some boolean expression here) {
-                // Things that need to be done if the expression evaluates to true
-            }
-            ```
-					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
-            ## First if statement 
-            
-						you cannot use one reference to change <br> where another reference is pointed
-						```js
-            if (temperature >= 10 && weather === 'sunny') {
-                wear(cool_tshirt);
-                wear(sunglasses);
-            }
-            ```
-					</textarea>
-				</section>
-				<section data-markdown>
-					<textarea data-template>
-            ## else statement 
-            
-            Now, this is too limited. Usually you make decision for both cases, not only if the condition is true. You do something `else` if the condition is not true. In case of JS, you can do this by using the word? `else` :smile: 
             ```js
-            if (temperature >= 10 && weather === 'sunny') {
-                wear(cool_tshirt);
-                wear(sunglasses);
-            } else {
-                wear(warm_hoodie);
+            class Table {
+              constructor(color, legs){
+                this.color = color;
+                this.legs = legs;
+              }
+            }
+
+            const myTable = new Table('red', 4);
+            ```
+					</textarea>
+        </section>
+        <section>
+          <section data-markdown>
+            <textarea data-template>
+              ## Couple of notes
+              #### 1) Hoisting
+              #### 2) new vs function call
+            </textarea>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+              ```js
+              class Table {
+                constructor(color, legs){
+                  this.color = color;
+                  this.legs = legs;
+                }
+              }
+
+              const myTable = Table('red', 4);
+              ```
+            </textarea>
+          </section>
+        </section> -->
+				<!-- <section data-markdown>
+					<textarea data-template>
+            ## Constructor
+            
+            Note that if we wrote a class with function syntax, that function and the constructor of the Table class would ideally look the same.
+            ```js
+            function Table(color, legs){
+              this.color = color;
+              this.legs = legs;
+            }
+
+            constructor(color, legs){
+              this.color = color;
+              this.legs = legs;
             }
             ```
 					</textarea>
-				</section>
+				</section> 
 				<section data-markdown>
 					<textarea data-template>
-            ## if .. else statement 
+            ## Constructor
             
-						What if I want to make more than 2 choices depending on the conditions. What if it's below -15 outside? Warm hoodie is not enough to not freeze in that situation. We need some other case.
+            So constructor is a special method of a class, that describes how the object should be constructed, in other words, it is setting the peroperties of the object.
+            table.color, table.legs etc...
+
+            Note that there can be only ONE constructor for a class.
 					</textarea>
 				</section>
 				<section data-markdown>
 					<textarea data-template>
-            ## A lot of choices. 
+            ## Prototype methods 
             
-						```
-            if (temperature >= 10 && weather === 'sunny') {
-                wear(cool_tshirt);
-                wear(sunglasses);
-            } else if (temperature <= -15) {
-                wear(warm_coat);
-                wear(warm_hoodie);
-                wear(scarf);
-                wear(hat);
-                wear(warm_socks); // Granny was here :) 
-            } else {
-                wear(warm_hoodie);
-            }
-            ```
+            Again, if we want to add a method to our object, in the class we can write this.f = () => {}.
+            But as we saw, this is not good for the memory, so we should add the function to the prototpe of the class.
+            With function declaration of the class, we would mutate the prototype after and outside the class.
 					</textarea>
 				</section>
 				<section data-markdown>
 					<textarea data-template>
-            ## TMNT 
-            
-            Program that tells TMNT name.
+            ## Prototype methods
+
+            ```js
+            MyClass.prototype.f = () => {}
             ```
-            Leonardo is wearing a blue mask
-            Raphael is wearing a red mask
-            Michelangelo is wearing an orange mask
-            Donatello is wearing a purple mask
-            ```
+
+            This looks ugly, and often it is not a good idea to mutate the prototype of a class, because of performance issues and sometimes even the risk of breaking the prototype chain.
 					</textarea>
-				</section>
+        </section> 
+        <section>
+          <section data-markdown>
+            <textarea data-template>
+              ## Prototype methods
+  
+              So the way we actually do it with class notation is simple.
+              We just add the method in the class, and it automatically is being assigned to the prototpe.
+            </textarea>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+              ```js
+              class Person {
+                constructor(name, profession, colorOfHair){
+                  this.name = name;
+                  this.profession = profession;
+                  this.colorOfHair = colorOfHair;
+                }
+  
+                run(){
+                  console.log(`I am ${this.name}, and I am running.`);
+                }
+  
+                sleep(){
+                  console.log(`Shshsh, ${this.name} is sleeping.`);
+                }
+              }
+              ```
+            </textarea>
+          </section>
+        </section> 
+
 				<section data-markdown>
 					<textarea data-template>
-            ## TMNT with if .. else 
+            ## Static methods
             
-						```js
-            if (color === 'blue') {
-                console.log('Leonardo');
-            } else if (color === 'red') {
-                console.log('Raphael')
-            } else if (color === 'orange') {
-                console.log('Michelangelo')
-            } else {
-                console.log('Donatello');
-            }
+            Sometimes we do not want to add methods to the prototype of the class, and not pass it to any instance of the class.
+            In other words, we do not want that method to be accessible on the prototype chain.
+            Very often those methods are just utility (helper) functions for an application.
+					</textarea>
+        </section>
+        
+        <section data-markdown>
+					<textarea data-template>
+            ## Static methods
+            
+            For example, all the methods in the Math class (or object, because everything in JS are objects) are static.
+            And they are used as utility functions in our JS apps.
+            ```js
+            Math.floor();
+            Math.ceil();
+            Math.random();
             ```
 					</textarea>
-				</section>
+        </section>
+        <section>
+          <section data-markdown>
+            <textarea data-template>
+              ## Static methods
+              
+              So to create a static method, we just add the word static in front of it.
+            </textarea>
+          </section>
+          <section data-markdown>
+            <textarea data-template>
+              ```js
+              class MyMath {
+                static random(n){ // we want a function to return a random number from 0 to n
+                  return Math.random() * n;
+                }
+
+                notAStaticMethod(){
+                  console.log('hey, I am not a static method.');
+                }
+              }
+
+              console.log(MyMath.random);
+              console.log(MyMath.notAStaticMethod);
+              console.log(MyMath.prototype.notAStaticMethod);
+              console.log(MyMath.random(5));
+              ```
+            </textarea>
+          </section>
+        </section> -->
+				
 				<section data-markdown>
 					<textarea data-template>
             ## Correct the bug! 
