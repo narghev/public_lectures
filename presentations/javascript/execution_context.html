@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>JavaScript Execution Context</title>
+
+  <link rel="stylesheet" href="../../css/reveal.css">
+  <link rel="stylesheet" href="../../css/theme/night.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="../../lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+              #### Introduction
+              
+              Imagine someone says, iterate hackerspace. What would come to your mind by hearing that?
+            </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+              Imagine I say this hackerspace. Actually the same thing would come to your mind, becuase RIGHT NOW we are in iterate hackerspace.
+            </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+              And finally, let's imagine we are talking to someone, and they say this building, this street, this city, etc...
+            </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+              The first thing that we notice is that, the person we are talking to can say the same thing (this, this, this) and depending
+              on the place or the environment we are in, we can understand different things.
+            </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+              The same thing can happen in code, we have defined a top level constant variable, and let's say we are NEVER defining another variable with the same name
+              in another function or a block. In that case the variable a, is never going to change. It is always going to stay the same.
+            </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+              For example, I say Yerevan, Baghramyan ave. 40. Wherever that someone reads that, they are goin to know that means AUA.
+              But, if right now, I say this building, this building means AUA, untill we actually are in AUA.
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### this
+
+            That is exactly the way JS this variable works. Depending on the execution context it is in, it can mean very different things.
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Top level this
+
+            ```js
+            console.log(this);
+
+            /*
+              Browser
+
+              Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}
+            */
+
+            /*
+              Node
+
+              global object
+            */
+            ```
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+              #### this
+  
+              ```js
+              const joe = {
+                name: 'Joe',
+                greet: function() {
+                  console.log(`Hello, my name is ${this.name}.`);
+                }
+              };
+              
+              joe.greet();
+              ```
+            </textarea>
+          </section>
+      </section>
+
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+              #### Global context
+
+              In the global execution context (outside of any function), this refers to the global object.
+
+              ```js
+              // Browser
+              console.log(this === window); // true
+
+              a = 37;
+              console.log(window.a); // 37
+
+              this.b = "iterate hackerspace";
+              console.log(window.b); // "iterate hackerspace"
+              console.log(b); // "iterate hackerspace"
+              ```
+            </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+                #### Global context
+  
+                In the global execution context (outside of any function), this refers to the global object.
+  
+                ```js
+                // Node
+                console.log(this === global); // true
+  
+                a = 37;
+                console.log(global.a); // 37
+  
+                this.b = "iterate hackerspace";
+                console.log(global.b); // "iterate hackerspace"
+                console.log(b); // "iterate hackerspace"
+                ```
+              </textarea>
+          </section>
+      </section>
+
+      <section>
+          <section data-markdown>
+              <textarea data-template>
+                  #### Function context
+      
+                  ```js
+                  function f(propertyName){
+                    console.log(this[propertyName])
+                  }
+
+                  a = 5;
+                  f('a'); // 5
+                  ```
+                </textarea>
+            </section>
+
+            <section data-markdown>
+                <textarea data-template>
+                    #### Function context
+        
+                    ```js
+                    const obj = {
+                      a: 'hello',
+                      f: function(propertyName){
+                        console.log(this[propertyName])
+                      }
+                    }
+  
+                    obj.f('a'); // 'hello'
+                    ```
+                  </textarea>
+              </section>
+      </section>
+      
+      <section>
+          <section data-markdown>
+              <textarea data-template>
+                  #### Forcing context
+                
+                </textarea>
+            </section>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
+              ## Q and A
+  
+              #### THANK YOU!
+            </textarea>
+      </section>
+    </div>
+  </div>
+  <script src="../../lib/js/head.min.js"></script>
+  <script src="../../js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      dependencies: [
+        { src: '../../plugin/markdown/marked.js' },
+        { src: '../../plugin/markdown/markdown.js' },
+        { src: '../../plugin/notes/notes.js', async: true },
+        { src: '../../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+
+</html>
