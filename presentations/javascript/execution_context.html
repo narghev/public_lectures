@@ -27,45 +27,56 @@
   <div class="reveal">
     <div class="slides">
 
+      <section data-markdown>
+        <textarea data-template>
+          <h3 style="color:#e7ad52">JavaScript Execution Context</h3>
+        </textarea>
+      </section>
+
       <section>
         <section data-markdown>
           <textarea data-template>
-              #### Introduction
-              
-              Imagine someone says, iterate hackerspace. What would come to your mind by hearing that?
-            </textarea>
+            #### Introduction
+            
+            Imagine someone says, __iterate hackerspace__.
+            What would come to your mind by hearing that ?
+          </textarea>
         </section>
 
         <section data-markdown>
           <textarea data-template>
-              Imagine I say this hackerspace. Actually the same thing would come to your mind, becuase RIGHT NOW we are in iterate hackerspace.
-            </textarea>
+            Imagine I say __this__ hackerspace. Actually the same thing would come to your mind,
+            becuase RIGHT NOW we are in iterate hackerspace.
+          </textarea>
         </section>
 
         <section data-markdown>
           <textarea data-template>
-              And finally, let's imagine we are talking to someone, and they say this building, this street, this city, etc...
-            </textarea>
+            And finally, let's imagine we are talking to someone,
+            and they say this building, this street, this city, etc...
+          </textarea>
         </section>
 
         <section data-markdown>
           <textarea data-template>
-              The first thing that we notice is that, the person we are talking to can say the same thing (this, this, this) and depending
-              on the place or the environment we are in, we can understand different things.
-            </textarea>
+            The first thing that we notice is that, the person we are talking to can say the same thing
+            (this, this, this) and depending
+            on the place or the environment we are in, we can understand different things.
+          </textarea>
         </section>
 
         <section data-markdown>
           <textarea data-template>
-              The same thing can happen in code, we have defined a top level constant variable, and let's say we are NEVER defining another variable with the same name
-              in another function or a block. In that case the variable a, is never going to change. It is always going to stay the same.
-            </textarea>
+            The same thing can happen in code, we have defined a top level constant variable
+            <span style="color:red">foo</span>, and let's say we are NEVER defining another variable with the same name
+            in another function or a block. In that case <span style="color:red">foo</span>, is never going to change. It is always going to stay the same.
+          </textarea>
         </section>
 
         <section data-markdown>
           <textarea data-template>
-              For example, I say Yerevan, Baghramyan ave. 40. Wherever that someone reads that, they are goin to know that means AUA.
-              But, if right now, I say this building, this building means AUA, untill we actually are in AUA.
+            For example, I say Yerevan, Baghramyan ave 40. Wherever that someone reads that, they are goin to know that means AUA.
+            But, if right now, I say this building, this building means AUA, untill we actually are in AUA.
           </textarea>
         </section>
       </section>
@@ -98,24 +109,24 @@
               global object
             */
             ```
-            </textarea>
+          </textarea>
         </section>
 
         <section data-markdown>
           <textarea data-template>
-              #### this
-  
-              ```js
-              const joe = {
-                name: 'Joe',
-                greet: function() {
-                  console.log(`Hello, my name is ${this.name}.`);
-                }
-              };
-              
-              joe.greet();
-              ```
-            </textarea>
+            #### this
+
+            ```js
+            const joe = {
+              name: 'Joe',
+              greet: function() {
+                console.log(`Hello, my name is ${this.name}.`);
+              }
+            };
+            
+            joe.greet(); // 'Hello, my name is Joe.'
+            ```
+          </textarea>
         </section>
       </section>
 
@@ -123,22 +134,22 @@
       <section>
         <section data-markdown>
           <textarea data-template>
-              #### Global context
+            #### Global context
 
-              In the global execution context (outside of any function), this refers to the global object.
+            In the global execution context (outside of any function), this refers to the global object.
 
-              ```js
-              // Browser
-              console.log(this === window); // true
+            ```js
+            // Browser
+            console.log(this === window); // true
 
-              a = 37;
-              console.log(window.a); // 37
+            a = 37;
+            console.log(window.a); // 37
 
-              this.b = "iterate hackerspace";
-              console.log(window.b); // "iterate hackerspace"
-              console.log(b); // "iterate hackerspace"
-              ```
-            </textarea>
+            this.b = "iterate hackerspace";
+            console.log(window.b); // "iterate hackerspace"
+            console.log(b); // "iterate hackerspace"
+            ```
+          </textarea>
         </section>
 
         <section data-markdown>
@@ -218,7 +229,7 @@
           <textarea data-template>
             #### Forcing context
           
-            There are several ways of forcing a context on a function. An easy way to imagine what forcing a context does to a function
+            There are several ways of forcing a context on a function. An easy way to imagine what forcing a context does to a function,
             is changing the <span style="color:red">this</span> by the object we want.
           </textarea>
         </section>
@@ -333,116 +344,116 @@
       </section>
 
       <section>
-          <section data-markdown>
-              <textarea data-template>
-                #### arrow functions
-              
-                Besides regular functions, js has arrow functions. Their biggest difference is that arrow functions do not have
-                their own context.
-              </textarea>
-            </section>
+        <section data-markdown>
+          <textarea data-template>
+            #### arrow functions
+          
+            Besides regular functions, js has arrow functions. Their biggest difference is that arrow functions do not have
+            their own context.
+          </textarea>
+        </section>
 
-            <section data-markdown>
-                <textarea data-template>
-                  #### arrow functions
+        <section data-markdown>
+          <textarea data-template>
+            #### arrow functions
 
-                  arrow function syntax
-                
-                  ```js
-                  const sum = (n1, n2) => {
-                    return n1+n2;
-                  };
+            arrow function syntax
+          
+            ```js
+            const sum = (n1, n2) => {
+              return n1+n2;
+            };
 
-                  const square = n => { // no braces
-                    return n ** 2; // n*n
-                  };
+            const square = n => { // no braces
+              return n ** 2; // n*n
+            };
 
-                  const sq = n => n*n;
-                  ```
-                </textarea>
-              </section>
+            const sq = n => n*n;
+            ```
+          </textarea>
+        </section>
 
-              <section data-markdown>
-                  <textarea data-template>
-                    #### arrow functions
-                  
-                    ```js
-                    function createObject() {
-                      console.log('Inside `createObject`:', this.foo);
-                      return {
-                        foo: 42,
-                        bar: function() {
-                          console.log('Inside `bar`:', this.foo);
-                        }
-                      };
-                    }
-                    
-                    createObject.call({foo: 21}).bar();
-                    // Inside `createObject`: 21
-                    // Inside `bar`: 42
-                    ```
-                  </textarea>
-                </section>
+        <section data-markdown>
+          <textarea data-template>
+            #### arrow functions
+          
+            ```js
+            function createObject() {
+              console.log('Inside `createObject`:', this.foo);
+              return {
+                foo: 42,
+                bar: function() {
+                  console.log('Inside `bar`:', this.foo);
+                }
+              };
+            }
+            
+            createObject.call({foo: 21}).bar();
+            // Inside `createObject`: 21
+            // Inside `bar`: 42
+            ```
+          </textarea>
+        </section>
 
-                <section data-markdown>
-                  <textarea data-template>
-                    #### arrow functions
-                  
-                    ```js
-                    function createObject() {
-                      console.log('Inside `createObject`:', this.foo);
-                      return {
-                        foo: 42,
-                        bar: () => {
-                          console.log('Inside `bar`:', this.foo);
-                        }
-                      };
-                    }
-                    
-                    createObject.call({foo: 21}).bar();
-                    // Inside `createObject`: 21
-                    // Inside `bar`: 21
-                    ```
-                  </textarea>
-                </section>
+        <section data-markdown>
+          <textarea data-template>
+            #### arrow functions
+          
+            ```js
+            function createObject() {
+              console.log('Inside `createObject`:', this.foo);
+              return {
+                foo: 42,
+                bar: () => {
+                  console.log('Inside `bar`:', this.foo);
+                }
+              };
+            }
+            
+            createObject.call({foo: 21}).bar();
+            // Inside `createObject`: 21
+            // Inside `bar`: 21
+            ```
+          </textarea>
+        </section>
 
-                <section data-markdown>
-                  <textarea data-template>
-                    ```js
-                    const obj = {
-                      elements: [0,1,2,3,4,5,6,7,8,9],
-                      exponent: 2,
-                      calc: function(){
-                        return this.elements.map( e => e ** this.exponent);
-                      }
-                    };
-                    
-                    console.log(obj.calc()); // [0,1,4,9,16,25,36,49,64,81]
-                    console.log(obj.calc.call({
-                      exponent: 3,
-                      elements: obj.elements
-                    })); // [0,1,8,27,64,125,216,343,512,729]
-                    ```
-                  </textarea>
-                </section>
+        <section data-markdown>
+          <textarea data-template>
+            ```js
+            const obj = {
+              elements: [0,1,2,3,4,5,6,7,8,9],
+              exponent: 2,
+              calc: function(){
+                return this.elements.map( e => e ** this.exponent);
+              }
+            };
+            
+            console.log(obj.calc()); // [0,1,4,9,16,25,36,49,64,81]
+            console.log(obj.calc.call({
+              exponent: 3,
+              elements: obj.elements
+            })); // [0,1,8,27,64,125,216,343,512,729]
+            ```
+          </textarea>
+        </section>
 
-                <section data-markdown>
-                  <textarea data-template>
-                    ```js
-                    const obj = {
-                      elements: [0,1,2,3,4,5,6,7,8,9],
-                      exponent: 2,
-                      calc: function(){
-                        return this.elements.map(function(e){
-                          return e ** this.exponent;
-                        });
-                      }
-                    };
-                    
-                    console.log(obj.calc()); // [NaN,NaN,NaN,...]
-                    ```
-                  </textarea>
-                </section>
+        <section data-markdown>
+          <textarea data-template>
+            ```js
+            const obj = {
+              elements: [0,1,2,3,4,5,6,7,8,9],
+              exponent: 2,
+              calc: function(){
+                return this.elements.map(function(e){
+                  return e ** this.exponent;
+                });
+              }
+            };
+            
+            console.log(obj.calc()); // [NaN,NaN,NaN,...]
+            ```
+          </textarea>
+        </section>
       </section>
 
 
