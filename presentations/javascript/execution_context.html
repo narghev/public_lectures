@@ -219,7 +219,7 @@
             #### Forcing context
           
             There are several ways of forcing a context on a function. An easy way to imagine what forcing a context does to a function
-            is changing the this in by the object we want.
+            is changing the <span style="color:red">this</span> by the object we want.
           </textarea>
         </section>
         <section data-markdown>
@@ -352,6 +352,12 @@
                   const sum = (n1, n2) => {
                     return n1+n2;
                   };
+
+                  const square = n => { // no braces
+                    return n ** 2; // n*n
+                  };
+
+                  const sq = n => n*n;
                   ```
                 </textarea>
               </section>
@@ -359,13 +365,81 @@
               <section data-markdown>
                   <textarea data-template>
                     #### arrow functions
-  
-                    arrow function syntax
                   
                     ```js
-                    const sum = (n1, n2) => {
-                      return n1+n2;
+                    function createObject() {
+                      console.log('Inside `createObject`:', this.foo);
+                      return {
+                        foo: 42,
+                        bar: function() {
+                          console.log('Inside `bar`:', this.foo);
+                        }
+                      };
+                    }
+                    
+                    createObject.call({foo: 21}).bar();
+                    // Inside `createObject`: 21
+                    // Inside `bar`: 42
+                    ```
+                  </textarea>
+                </section>
+
+                <section data-markdown>
+                  <textarea data-template>
+                    #### arrow functions
+                  
+                    ```js
+                    function createObject() {
+                      console.log('Inside `createObject`:', this.foo);
+                      return {
+                        foo: 42,
+                        bar: () => {
+                          console.log('Inside `bar`:', this.foo);
+                        }
+                      };
+                    }
+                    
+                    createObject.call({foo: 21}).bar();
+                    // Inside `createObject`: 21
+                    // Inside `bar`: 21
+                    ```
+                  </textarea>
+                </section>
+
+                <section data-markdown>
+                  <textarea data-template>
+                    ```js
+                    const obj = {
+                      elements: [0,1,2,3,4,5,6,7,8,9],
+                      exponent: 2,
+                      calc: function(){
+                        return this.elements.map( e => e ** this.exponent);
+                      }
                     };
+                    
+                    console.log(obj.calc()); // [0,1,4,9,16,25,36,49,64,81]
+                    console.log(obj.calc.call({
+                      exponent: 3,
+                      elements: obj.elements
+                    })); // [0,1,8,27,64,125,216,343,512,729]
+                    ```
+                  </textarea>
+                </section>
+
+                <section data-markdown>
+                  <textarea data-template>
+                    ```js
+                    const obj = {
+                      elements: [0,1,2,3,4,5,6,7,8,9],
+                      exponent: 2,
+                      calc: function(){
+                        return this.elements.map(function(e){
+                          return e ** this.exponent;
+                        });
+                      }
+                    };
+                    
+                    console.log(obj.calc()); // [NaN,NaN,NaN,...]
                     ```
                   </textarea>
                 </section>
