@@ -1,6 +1,5 @@
 # My Public Lectures and slide shows
-### Made by the awesome reveal.js
-(https://github.com/hakimel/reveal.js/)
+### Made by the awesome [reveal.js](https://github.com/hakimel/reveal.js/)
 
 ### How To Run
 
@@ -13,4 +12,4 @@
   ```
 
   - if it does not open the browser automatically,
-  open __localhost:8080__ and navigate to __presentations/__
+  open __localhost:8000__ and navigate to __presentations/__
