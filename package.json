@@ -6,10 +6,9 @@
   "subdomain": "revealjs",
   "main": "js/reveal.js",
   "scripts": {
-    "test": "grunt test",
     "start": "grunt serve",
     "build": "grunt",
-    "postinstall": "yarn start"
+    "postinstall": "grunt connect --keepAlive=true"
   },
   "author": {
     "name": "Narek Ghevandiani",
