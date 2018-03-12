@@ -194,6 +194,23 @@
                     ```
                   </textarea>
               </section>
+
+              <section data-markdown>
+                <textarea data-template>
+                    #### Function context
+        
+                    ```js
+                    const obj = {
+                      a: 'hello',
+                      f: function(){
+                        console.log(this.a)
+                      }
+                    }
+  
+                    obj.f(); // 'hello'
+                    ```
+                  </textarea>
+              </section>
       </section>
       
       <section>
@@ -201,9 +218,120 @@
               <textarea data-template>
                   #### Forcing context
                 
+                  There are several ways of forcing a context on a function. An easy way to imagine what forcing a context does to a function
+                  is changing the this in by the object we want.
                 </textarea>
             </section>
+            <section data-markdown>
+                <textarea data-template>
+                    #### Forcing context
+                  
+                    ```js
+                    const obj = {
+                      a: 'obj',
+                      f: function(){
+                        console.log(this.a);
+                      }
+                    };
+
+                    const object = { a: 'object' };
+
+                    obj.f(); // 'obj'
+                    ```
+                  </textarea>
+              </section>
+              <section data-markdown>
+                  <textarea data-template>
+                      #### Forcing context
+                    
+                      Now, we want to call the function with the context of <span style="color:red">_object_</span>
+                      , means, we want to force the context of <span style="color:red">_object_</span> 
+                      on <span style="color:red">_obj.f_</span> function.
+                    </textarea>
+                </section>
+                <section data-markdown>
+                    <textarea data-template>
+                        #### .call .apply
+                      
+                        ```js
+                        const obj = {
+                          a: 'obj',
+                          f: function(){
+                            console.log(this.a);
+                          }
+                        };
+    
+                        const object = { a: 'object' };
+
+                        obj.f.call(object);  // 'object'
+                        obj.f.apply(object); // 'object'
+                        ```
+                      </textarea>
+                  </section>
+
+                  <section data-markdown>
+                      <textarea data-template>
+                          #### .call .apply
+                        
+                          <span style="color:red">.call</span> and <span style="color:red">.apply</span> are mthods that any js function inherits from prototype. They both get the new context as the first argument
+                          and they instantly call the function with it.
+                        </textarea>
+                    </section>
+
+                    <section data-markdown>
+                        <textarea data-template>
+                            #### .call .apply
+                          
+                            ```js
+                            const obj = {
+                              a: 5,
+                              f: function(x, y){
+                                console.log(x + y + this.a);
+                              }
+                            };
+
+                            const object = {a: 0};
+
+                            obj.f(1,1); // 7
+                            obj.f.call(object, 1, 1); // 2
+                            obj.f.apply(object, [1, 1]); // 2
+                            ```
+                          </textarea>
+                      </section>
+
+                      <section data-markdown>
+                          <textarea data-template>
+                              #### .bind
+                            
+                              <span style="color:red">_.bind_</span> is also a function like
+                              <span style="color:red">_.call_</span> and <span style="color:red">_.apply_</span> but
+                              instead of calling the function with a forced context, it is returning a new function bound to the context given.
+                            </textarea>
+                        </section>
+
+                        <section data-markdown>
+                            <textarea data-template>
+                                #### .bind
+                              
+                                ```js
+                                const obj = {
+                                  a: 'obj',
+                                  f: function(){
+                                    console.log(this.a);
+                                  }
+                                };
+            
+                                const object = { a: 'object' };
+        
+                                obj.f.bind(object)(); // 'object'
+
+                                const boundFunction = obj.f.bind(object);
+                                boundFunction(); // 'object'
+                                ```
+                              </textarea>
+                          </section>
       </section>
+      
 
       <section data-markdown>
         <textarea data-template>
