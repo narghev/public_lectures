@@ -9,7 +9,7 @@
 
   ```
   $ yarn
-  $ npm start
+  $ yarn start
   ```
 
   - if it does not open the browser automatically,
