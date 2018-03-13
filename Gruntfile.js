@@ -2,7 +2,6 @@
 module.exports = function(grunt) {
 	var port = grunt.option('port') || 8000;
 	var root = grunt.option('root') || '.';
-	var keepAlive = Boolean(grunt.option('keepAlive'));
 
 	if (!Array.isArray(root)) root = [root];
 
@@ -98,8 +97,7 @@ module.exports = function(grunt) {
 					base: root,
 					livereload: true,
 					open: true,
-					useAvailablePort: true,
-					keepalive: keepAlive
+					useAvailablePort: true
 				}
 			}
 		},
