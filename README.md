@@ -1,5 +1,6 @@
 # My Public Lectures and slide shows
 ### Made by the awesome [reveal.js](https://github.com/hakimel/reveal.js/)
+#### All stylings in _/lib/css_ are made by [highlight.js](https://highlightjs.org/)
 
 ### How To Run
 
