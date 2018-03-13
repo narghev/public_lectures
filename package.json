@@ -8,7 +8,7 @@
   "scripts": {
     "start": "grunt serve",
     "build": "grunt",
-    "postinstall": "grunt connect --keepAlive=true"
+    "postinstall": ""
   },
   "author": {
     "name": "Narek Ghevandiani",
