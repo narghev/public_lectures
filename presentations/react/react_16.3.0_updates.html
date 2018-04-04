@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>React 16.3.0 Updates</title>
+
+  <link rel="stylesheet" href="../../css/reveal.css">
+  <link rel="stylesheet" href="../../css/theme/night.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="../../lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section data-markdown>
+        <textarea data-template>
+          <h3 style="color:#e7ad52">React 16.3.0 Updates</h3>
+        </textarea>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
+          #### Introduction
+          
+          - New and official context api
+          - Some updates to Component lifecycle methods
+          - createRef api
+          - Strict mode
+        </textarea>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### New and official context api
+            
+            - Why do we need context ?
+            - The experimental context api had been around previously (Redux, Mobx)
+
+            _Note_
+
+            _The old context API will keep working for all React 16.x releases, so you will have time to migrate._
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Creating [context](https://github.com/narghev/react_16.3.0_updates/tree/master/src/components/context_api)
+
+            ```js
+            // Creates a react context with default value 'dark'
+            const ThemeContext = React.createContext('dark');
+            // ThemeContext includes Provider and Consumer
+
+            ```
+            ```html
+            // Provider
+            <ThemeContext.Provider value="light">
+              <Toolbar />
+            </ThemeContext.Provider>
+
+            // Consumer
+            <ThemeContext.Consumer>
+              {theme => <Button {...props} theme={theme} />}
+            </ThemeContext.Consumer>
+            ```
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### Component lifecycle updates
+
+            - constructor -> componentWillMount -> render -> componentDidMount
+
+            - componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> render -> componentDidUpdate
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Component lifecycle updates
+
+            _Many of these issues are exacerbated by a subset of the component lifecycles (componentWillMount, componentWillReceiveProps, and componentWillUpdate).
+            These also happen to be the lifecycles that cause the most confusion within the React community.
+            For these reasons, we are going to deprecate those methods in favor of better alternatives._
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Component lifecycle updates
+
+            - 16.3.0 available
+            - 16.x.x deprecated warning
+            - 17.0.0 still available but only with UNSAFE_ prefix
+          </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+              #### New methods
+  
+              - [getDerivedStateFromProps](https://github.com/narghev/react_16.3.0_updates/blob/master/src/components/get_derived_state_from_props.js)
+              - []()
+            </textarea>
+          </section>
+
+        <section data-markdown>
+          <textarea data-template>
+              #### [getDerivedStateFromProps](https://github.com/narghev/react_16.3.0_updates/blob/master/src/components/get_derived_state_from_props.js)
+
+              is invoked after a component is instantiated as well as when it receives new props.
+              It should return an object to update state, or null to indicate that the new props do not require any state updates.
+          </textarea>
+        </section>
+      </section>
+
+
+      <section data-markdown>
+        <textarea data-template>
+          ## Q and A
+
+          #### THANK YOU!
+        </textarea>
+      </section>
+    </div>
+  </div>
+  <script src="../../lib/js/head.min.js"></script>
+  <script src="../../js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      dependencies: [
+        { src: '../../plugin/markdown/marked.js' },
+        { src: '../../plugin/markdown/markdown.js' },
+        { src: '../../plugin/notes/notes.js', async: true },
+        { src: '../../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+
+</html>
