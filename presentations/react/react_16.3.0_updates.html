@@ -38,8 +38,8 @@
           #### Introduction
           
           - New and official context api
+          - createRef api, forwardRef api
           - Some updates to Component lifecycle methods
-          - createRef api
           - Strict mode
         </textarea>
       </section>
@@ -54,7 +54,7 @@
 
             _Note_
 
-            _The old context API will keep working for all React 16.x releases, so you will have time to migrate._
+            _The old context API will keep working for all React 16.x releases, so we have time to migrate._
           </textarea>
         </section>
 
@@ -79,6 +79,70 @@
               {theme => <Button {...props} theme={theme} />}
             </ThemeContext.Consumer>
             ```
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### Ref apis
+            
+            - [createRef](https://reactjs.org/docs/refs-and-the-dom.html#creating-refs)
+            - [forwardRef](https://reactjs.org/blog/2018/03/29/react-v-16-3.html#forwardref-api)
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### String ref problems
+            
+            ![string-ref-problems](https://raw.githubusercontent.com/narghev/public_lectures/master/presentation_pictures/react_16.3.0_updates/string-ref-problems.png)
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### [Callback ref api](https://github.com/narghev/react_16.3.0_updates/blob/master/src/components/ref_api/callback_ref.js)
+
+            ```js
+            inputRef={el => this.inputElement = el}
+            ```
+            
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### [createRef api](https://github.com/narghev/react_16.3.0_updates/blob/master/src/components/ref_api/createref_ref.js)
+
+            ```js
+            divRef=React.createRef();
+            ```
+
+            ```html
+            <div ref={this.divRef}></div>
+            ```
+            
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### [forwardRef api](https://github.com/narghev/react_16.3.0_updates/blob/master/src/components/ref_api/forward_ref.js)
+
+            ```js
+            const Child = React.forwardRef((props, ref) => (
+              <div>
+                <div>
+                  <div>
+                    <input {...{ref}} />
+                  </div>
+                </div>
+              </div>
+            ));
+            ```
+            
           </textarea>
         </section>
       </section>
@@ -118,17 +182,27 @@
             <textarea data-template>
               #### New methods
   
-              - [getDerivedStateFromProps](https://github.com/narghev/react_16.3.0_updates/blob/master/src/components/get_derived_state_from_props.js)
-              - []()
+              - [getDerivedStateFromProps](https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops)
+              - [getSnapshotBeforeUpdate](https://reactjs.org/docs/react-component.html#getsnapshotbeforeupdate)
             </textarea>
           </section>
 
         <section data-markdown>
           <textarea data-template>
-              #### [getDerivedStateFromProps](https://github.com/narghev/react_16.3.0_updates/blob/master/src/components/get_derived_state_from_props.js)
+              #### [getDerivedStateFromProps](https://github.com/narghev/react_16.3.0_updates/blob/master/src/components/new_lcm/get_derived_state_from_props.js)
 
               is invoked after a component is instantiated as well as when it receives new props.
               It should return an object to update state, or null to indicate that the new props do not require any state updates.
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+              #### [getSnapshotBeforeUpdate](https://github.com/narghev/react_16.3.0_updates/blob/master/src/components/new_lcm/get_snapshot_before_update.js)
+
+              is invoked right before the most recently rendered output is committed to e.g.
+              the DOM. It enables your component to capture current values (e.g. scroll position)
+              before they are potentially changed. Any value returned by this lifecycle will be passed as a parameter to componentDidUpdate().
           </textarea>
         </section>
       </section>
