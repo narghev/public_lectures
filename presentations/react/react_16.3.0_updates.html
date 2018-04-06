@@ -205,6 +205,38 @@
               before they are potentially changed. Any value returned by this lifecycle will be passed as a parameter to componentDidUpdate().
           </textarea>
         </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### new React lifecycle !!!
+            #### Mounting
+
+            <div style="display: flex; flex-direction: column; align-items: baseline;">
+              <p style="font-size: 20px;">- constructor()</p>
+              <p style="font-size: 20px; color: #C6FF00;">- static getDerivedStateFromProps()</p>
+              <p style="font-size: 20px; color: #DD2C00;">- componentWillMount() / UNSAFE_componentWillMount()</p>
+              <p style="font-size: 20px;">- render()</p>
+              <p style="font-size: 20px;">- componentDidMount()</p>
+            </div>
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### new React lifecycle !!!
+            #### Updating
+
+            <div style="display: flex; flex-direction: column; align-items: baseline;">
+              <p style="font-size: 20px; color: #DD2C00;">- componentWillReceiveProps() / UNSAFE_componentWillReceiveProps()</p>
+              <p style="font-size: 20px; color: #C6FF00;">- static getDerivedStateFromProps()</p>
+              <p style="font-size: 20px;">- shouldComponentUpdate()</p>
+              <p style="font-size: 20px; color: #DD2C00;">- componentWillUpdate() / UNSAFE_componentWillUpdate()</p>
+              <p style="font-size: 20px;">- render()</p>
+              <p style="font-size: 20px; color: #C6FF00;">- getSnapshotBeforeUpdate()</p>
+              <p style="font-size: 20px;">- componentDidUpdate()</p>
+            </div>
+          </textarea>
+        </section>
       </section>
 
 
