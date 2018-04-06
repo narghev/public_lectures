@@ -152,9 +152,12 @@
           <textarea data-template>
             #### Component lifecycle updates
 
-            - constructor -> componentWillMount -> render -> componentDidMount
-
-            - componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> render -> componentDidUpdate
+            <div style="display: flex; flex-direction: column; align-items: baseline;">
+              <p style="font-size: 20px;">- constructor()</p>
+              <p style="font-size: 20px;">- componentWillMount()</p>
+              <p style="font-size: 20px;">- render()</p>
+              <p style="font-size: 20px;">- componentDidMount()</p>
+            </div>
           </textarea>
         </section>
 
@@ -162,9 +165,30 @@
           <textarea data-template>
             #### Component lifecycle updates
 
-            _Many of these issues are exacerbated by a subset of the component lifecycles (componentWillMount, componentWillReceiveProps, and componentWillUpdate).
+            <div style="display: flex; flex-direction: column; align-items: baseline;">
+              <p style="font-size: 20px;">- componentWillReceiveProps()</p>
+              <p style="font-size: 20px;">- shouldComponentUpdate()</p>
+              <p style="font-size: 20px;">- componentWillUpdate()</p>
+              <p style="font-size: 20px;">- render()</p>
+              <p style="font-size: 20px;">- componentDidUpdate()</p>
+            </div>
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Component lifecycle updates
+
+            _Many of these issues are exacerbated by a subset of the component lifecycles
+            <span style="color: #DD2C00;">(componentWillMount, componentWillReceiveProps, and componentWillUpdate)</span>.
             These also happen to be the lifecycles that cause the most confusion within the React community.
             For these reasons, we are going to deprecate those methods in favor of better alternatives._
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Async rendering
           </textarea>
         </section>
 
@@ -174,7 +198,7 @@
 
             - 16.3.0 available
             - 16.x.x deprecated warning
-            - 17.0.0 still available but only with UNSAFE_ prefix
+            - 17.0.0 still available but only with <span style="color: #DD2C00;">UNSAFE_</span> prefix
           </textarea>
         </section>
 
@@ -235,6 +259,27 @@
               <p style="font-size: 20px; color: #C6FF00;">- getSnapshotBeforeUpdate()</p>
               <p style="font-size: 20px;">- componentDidUpdate()</p>
             </div>
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### [StrictMode Component](https://reactjs.org/blog/2018/03/29/react-v-16-3.html#strictmode-component)
+
+            StrictMode is a tool for highlighting potential problems in an application.
+            Like Fragment, StrictMode does not render any visible UI.
+            It activates additional checks and warnings for its descendants.
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### [StrictMode Component](https://reactjs.org/blog/2018/03/29/react-v-16-3.html#strictmode-component)
+
+            _Note_
+            _StrictMode checks are run in development mode only; they do not impact the production build._
           </textarea>
         </section>
       </section>
