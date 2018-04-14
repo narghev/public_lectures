@@ -1,0 +1,648 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Event loop</title>
+
+  <link rel="stylesheet" href="../../css/reveal.css">
+  <link rel="stylesheet" href="../../css/theme/night.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="../../lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section data-markdown>
+        <textarea data-template>
+          <h3 style="color:#e7ad52">JavaScript Event Loop</h3>
+        </textarea>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### Revision
+  
+            ```js
+            setTimeout(()=>{
+              console.log('Hey');
+            }, 1000);
+  
+            setTimeout(console.log, 1000, 'Are you stuck in the evnet loop?');
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Revision
+  
+            ```js
+            const userName = 'narghev';
+            const url = `https://api.github.com/users/${userName}`;
+
+            (async () => {
+              const res = await fetch(url);
+              const user = await res.json();
+              console.log(user);
+            })();
+            ```
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### JS
+
+            How does JS actually work ?
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### What is JS ?
+
+            A <span style="color: red">single-threaded</span> high level programming language.......
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Single threaded ?
+
+            JS can do one thing at a time.
+            
+            ```js
+            console.log(1);
+            console.log(2);
+            console.log(3 + 4);
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### But
+
+            ```js
+            const p = new Promise(
+              res => setTimeout(res, 1000, 'How do I work?')
+            );
+
+            p.then(val => console.log(val));
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ```js
+            console.log(0);
+            setTimeout(console.log, 1000, 2);
+            console.log(3);
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ```js
+            console.log(0);
+            setTimeout(console.log, 0, 2);
+            console.log(3);
+            ```
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### JS Memeory
+
+            Heap & Stack
+            <div style="display: flex; flex-direction: row; justify-content: space-around;">
+              <img style="width: 45%; height: 45%" src="../../presentation_pictures/javascript_event_loop/heap.png" />
+              <img style="width: 45%; height: 45%" src="../../presentation_pictures/javascript_event_loop/stack.png" />
+            </div>
+          </textarea>
+        </section>
+      </section>  
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            ```js
+            console.log('Call stack');
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/empty_stack.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_0.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/empty_stack.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            ```js
+            const Func = () => {
+              console.log('Hello');
+            }
+
+            const F = () => {
+              console.log('Hey');
+              Func();
+            }
+
+            F();
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/empty_stack.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_1.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_2.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_1.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_4.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_3.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_4.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_1.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/empty_stack.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            ```js
+            const F = () => {
+              F();
+            };
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_overflow.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            <img src="../../presentation_pictures/javascript_event_loop/stack_overflow_error_screenshot.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            <img src="../../presentation_pictures/javascript_event_loop/call_stack_error.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Problems with having only a call stack
+
+            network, hard drive ...
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            <img src="../../presentation_pictures/javascript_event_loop/blocking.gif" />
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### Solution
+
+            - Single threaded
+            - But async
+            - With event loop
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ```js
+            console.log(0);
+            setTimeout(console.log, 1000, 2);
+            console.log(3);
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/empty_stack.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_0.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/empty_stack.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_5.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/empty_stack.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_0.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/empty_stack.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/clock.gif" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Call stack
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/stack_0.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Bigger Picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture.png" />
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### Callback queue
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/queue.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Function context
+
+            ```js
+            console.log(0);
+            setTimeout(console.log, 1000, 2);
+            console.log(3);
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_0.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_1.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_0.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_2.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_3.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_4.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_6.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_4.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/clock.gif" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_5.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_7.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/bigger_picture_0.png" />
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Example
+
+            ```html
+            <button id="b">Click</button>
+            <script>
+              const md = () => console.log('mose down')
+              
+              const mu = () => console.log('mose up')
+              
+              const cl = () => console.log('mose click')
+              
+              const button = document.getElementById('b');
+              button.onmousedown = md;
+              button.onmouseup = mu;
+              button.onclick = cl;
+            </script>
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/dom_api_example_0.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/dom_api_example_1.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/dom_api_example_3.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/dom_api_example_4.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/dom_api_example_5.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown data-transition="none">
+          <textarea data-template>
+            #### Bigger picture
+
+            <img style="height: 50vh" src="../../presentation_pictures/javascript_event_loop/dom_api_example_0.png" />
+          </textarea>
+        </section>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
+          ## Q and A
+
+          #### THANK YOU!
+        </textarea>
+      </section>
+    </div>
+  </div>
+  <script src="../../lib/js/head.min.js"></script>
+  <script src="../../js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      dependencies: [
+        { src: '../../plugin/markdown/marked.js' },
+        { src: '../../plugin/markdown/markdown.js' },
+        { src: '../../plugin/notes/notes.js', async: true },
+        { src: '../../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+
+</html>
