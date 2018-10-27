@@ -1,0 +1,271 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>TDD with Jest</title>
+
+  <link rel="stylesheet" href="../../css/reveal.css">
+  <link rel="stylesheet" href="../../css/theme/night.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="../../lib/css/atom-one-dark.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section data-markdown>
+        <textarea data-template>
+          <h3 style="color:#e7ad52">TDD with Jest</h3>
+        </textarea>
+      </section>
+
+      <section data-markdown>
+        <textarea data-template>
+          #### Topics going to be covered
+          
+          - What is TDD?
+          - [Jest](https://jestjs.io/)
+          - [Enzyme](https://airbnb.io/enzyme/)
+          - Snapshot testing
+        </textarea>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### TDD
+            
+            - In the long run provides huge speed of development
+            - Is a documentation for the code
+            - RGF cycle
+
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Red! Green! Refactor!
+            <img style="width: 45%; height: 45%" src="../../presentation_pictures/tdd_with_jest/red_green_refactor.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Misconceptions
+            1. TDD is too Time Consuming. The Business Team Would Never Approve
+            2. You Have to Write All Tests Before You Write the Code
+            3. If I use TDD I only need unit tests!
+            4. I can always write tests later
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### Xtreme programming
+            Includes
+
+            ...
+            - TDD
+            - Pair programming
+
+            ...
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            <img style="width: 70%; height: 70%" src="../../presentation_pictures/tdd_with_jest/pair_programming.jpeg" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            <img style="width: 70%; height: 70%" src="../../presentation_pictures/tdd_with_jest/xp.png" />
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### Frontend testing frameworks
+
+            <img style="width: 70%; height: 70%" src="../../presentation_pictures/tdd_with_jest/front_end_testing_frameworks.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Frontend testing frameworks
+
+            <img style="width: 15%; height: 15%" src="../../presentation_pictures/tdd_with_jest/mocha.png" />
+            <img style="width: 15%; height: 15%" src="../../presentation_pictures/tdd_with_jest/jasmine.png" />
+            <img style="width: 15%; height: 15%" src="../../presentation_pictures/tdd_with_jest/jest.png" />
+            <img style="width: 15%; height: 15%" src="../../presentation_pictures/tdd_with_jest/enzyme.png" />
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### [Jest](https://github.com/facebook/jest)
+
+            1. Developed by FB
+            2. Regular testing framework
+            3. Works great with react
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### [Testing functions](https://github.com/narghev/jest_examples/blob/master/src/testing_functions/functions.test.js)
+
+            ```js
+            const sum = (a, b) => a + b;
+
+            describe('Sum function', () => {
+              test('adds two numbers correctly', () => {
+                expect(sum(1, 2)).toBe(3);
+                expect(sum(5, 1)).toBe(6);
+                expect(sum(11, 6)).toBe(17);
+                expect(sum(64, 1)).toBe(65);
+                expect(sum(0, 134)).toBe(134);
+              });
+            });
+            ```
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Testing React Components
+
+            [Stateless components](https://github.com/narghev/jest_examples/blob/master/src/testing_react_components/stateless.test.js)
+
+            [Statefull components](https://github.com/narghev/jest_examples/blob/master/src/testing_react_components/stateful.test.js)
+          </textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+              #### render vs shallow vs mount
+
+              - Render:
+              No lifecycles,
+              Renders children,
+              Less api
+  
+              - Shallow:
+              No children rendering,
+              Isolated, you know for sure the error comes from here
+          
+              - Mount:
+              Lifecycle methods (like componentDidMount),
+              Renders children
+            </textarea>
+          </section>
+
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Notes
+
+            - Jest comes with [CRA](https://github.com/facebook/create-react-app)
+            - Enzyme Adapter
+            - [setupTests.js](https://github.com/narghev/jest_examples/blob/master/src/setupTests.js)
+          </textarea>
+        </section>
+      </section>
+
+      <section>
+        <section data-markdown>
+          <textarea data-template>
+            #### Snapshot testing
+
+            <img style="width: 60%; height: 60%" src="../../presentation_pictures/tdd_with_jest/camera.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Snapshot testing
+            
+            [Different from unit testing?](https://github.com/narghev/jest_examples/blob/master/src/testing_react_components/snapshot.test.js)
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Snapshot testing
+            
+            <img style="width: 60%; height: 60%" src="../../presentation_pictures/tdd_with_jest/good_or_bad.jpeg" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Updating the Snapshot
+            
+            <img style="width: 60%; height: 60%" src="../../presentation_pictures/tdd_with_jest/reading_snapshot_diff.png" />
+          </textarea>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            #### Snapshot testing VS TDD
+            
+            <span style="color: green">Green!</span>
+            Refactor!
+            <br>
+            <br>
+            <span style="color: red">Red?</span>
+          </textarea>
+        </section>
+      </section>
+
+
+      <section data-markdown>
+        <textarea data-template>
+          ## Q and A
+
+          #### THANK YOU!
+        </textarea>
+      </section>
+    </div>
+  </div>
+  <script src="../../lib/js/head.min.js"></script>
+  <script src="../../js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      dependencies: [
+        { src: '../../plugin/markdown/marked.js' },
+        { src: '../../plugin/markdown/markdown.js' },
+        { src: '../../plugin/notes/notes.js', async: true },
+        { src: '../../plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+
+</html>
